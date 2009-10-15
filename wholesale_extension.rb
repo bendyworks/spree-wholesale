@@ -2,9 +2,9 @@
 # require_dependency 'application'
 
 class WholesaleExtension < Spree::Extension
-  version "1.0"
-  description "Describe your extension here"
-  url "http://yourwebsite.com/wholesale"
+  version "0.1"
+  description "Add wholesale pricing to products"
+  url "http://github.com/mlambie/spree-wholesale"
 
   # Please use wholesale/config/routes.rb instead for extension routes.
 
