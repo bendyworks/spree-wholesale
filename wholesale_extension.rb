@@ -29,6 +29,11 @@ class WholesaleExtension < Spree::Extension
     #    add_extension_admin_tab [ :yourextension ]
     #  end
     #end
+    
+    # Reopen the Product class and delegate wholesale_price (first variant)
+    Product.class_eval do
+      delegate_belongs_to :master, :wholesale_price
+    end
 
     # make your helper avaliable in all views
     # Spree::BaseController.class_eval do
