@@ -9,5 +9,6 @@ Wholesale is an extension to Spree, the Ruby on Rails-based shopping cart system
 Copyright
 ---------
 
-Copyright 2009 Matthew Lambie
+Copyright 2009 Matthew Lambie.
+
 See LICENSE for the full license terms.
