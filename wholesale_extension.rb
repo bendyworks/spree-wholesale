@@ -108,7 +108,6 @@ class WholesaleExtension < Spree::Extension
         respond_to do |format|
           format.html {                                
             if success 
-              logger.error("YO: #{session.inspect}")
               modify_order_on_login
               flash[:notice] = t("logged_in_succesfully")
               redirect_back_or_default products_path
