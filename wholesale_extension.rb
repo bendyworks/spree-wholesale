@@ -143,12 +143,12 @@ class WholesaleExtension < Spree::Extension
       
       def force_retail
         order = Order.find_by_id(session[:order_id])
-        order.force_retail if !order.nil?
+        order.force_retail if !order.nil? && order.state == 'in_progress'
       end
       
       def force_wholesale
         order = Order.find_by_id(session[:order_id])
-        order.force_wholesale if !order.nil?
+        order.force_wholesale if !order.nil? && order.state == 'in_progress'
       end
     end
 
