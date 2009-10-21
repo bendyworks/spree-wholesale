@@ -40,7 +40,7 @@ class WholesaleExtension < Spree::Extension
       def product_price(product_or_variant, options={})
         options.assert_valid_keys(:format_as_currency, :show_vat_text)
         options.reverse_merge! :format_as_currency => true, :show_vat_text => Spree::Config[:show_price_inc_vat]
-        if ( !current_user.nil? && current_user.has_role?("wholesale") && !product_or_variant.wholesale_price.blank?)          
+        if (!current_user.nil? && current_user.has_role?("wholesale") && !product_or_variant.wholesale_price.blank?)          
           amount = product_or_variant.wholesale_price
         else
           amount = product_or_variant.price
