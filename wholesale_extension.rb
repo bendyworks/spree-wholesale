@@ -102,7 +102,7 @@ class WholesaleExtension < Spree::Extension
     
     UserSessionsController.class_eval do
       
-      before_filter :force_retail_order, :only => [:destroy]
+      before_filter :force_retail, :only => [:destroy]
       
       def create
         @user_session = UserSession.new(params[:user_session])
@@ -128,16 +128,14 @@ class WholesaleExtension < Spree::Extension
       private
       def modify_order_on_login
         user = User.find_by_id(session["user_credentials_id"]) || User.new
-        user.has_role?("wholesale") ? force_wholesale_order : force_retail_order
+        user.has_role?("wholesale") ? force_wholesale : force_retail
       end
       
-      def force_retail_order
-        order = Order.find_by_id(session[:order_id])
+      def force_retail(order = Order.find_by_id(session[:order_id]))
         order.force_retail if !order.nil? && order.state == 'in_progress'
       end
       
-      def force_wholesale_order
-        order = Order.find_by_id(session[:order_id])
+      def force_wholesale(order = Order.find_by_id(session[:order_id]))
         order.force_wholesale if !order.nil? && order.state == 'in_progress'
       end
     end
