@@ -125,7 +125,6 @@ class WholesaleExtension < Spree::Extension
       end
       
       def destroy
-        # logger.error("YO: in session destroy")
         modify_order_on_logout
         current_user_session.destroy
         flash[:notice] = t("logged_out")
@@ -139,18 +138,15 @@ class WholesaleExtension < Spree::Extension
       end
       
       def modify_order_on_logout
-        logger.error("YO: modify order on logout")
         force_retail
       end
       
       def force_retail
-        logger.error("YO: force retail")
         order = Order.find_by_id(session[:order_id])
         order.force_retail if !order.nil?
       end
       
       def force_wholesale
-        logger.error("YO: force wholesale")
         order = Order.find_by_id(session[:order_id])
         order.force_wholesale if !order.nil?
       end
