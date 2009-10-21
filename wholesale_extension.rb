@@ -83,6 +83,22 @@ class WholesaleExtension < Spree::Extension
         session[:order_token] = @order.token
       end
     end
+    
+    Order.class_eval do
+      def force_wholesale
+        self.line_items.each do |item|
+          item.price = Variant.find_by_id(item.variant_id).wholesale_price
+        end
+        self.save!
+      end
+      
+      def force_retail
+        self.line_items.each do |item|
+          item.price = Variant.find_by_id(item.variant_id).price
+        end
+        self.save!
+      end
+    end
 
     # make your helper avaliable in all views
     # Spree::BaseController.class_eval do
