@@ -102,6 +102,8 @@ class WholesaleExtension < Spree::Extension
     
     UserSessionsController.class_eval do
       
+      before_filter :force_retail_order, :only => [:destroy]
+      
       def create
         @user_session = UserSession.new(params[:user_session])
         success = @user_session.save
@@ -123,29 +125,18 @@ class WholesaleExtension < Spree::Extension
         end    
       end
       
-      def destroy
-        modify_order_on_logout
-        current_user_session.destroy
-        flash[:notice] = t("logged_out")
-        redirect_to products_path
-      end
-      
       private
       def modify_order_on_login
         user = User.find_by_id(session["user_credentials_id"]) || User.new
-        user.has_role?("wholesale") ? force_wholesale : force_retail
+        user.has_role?("wholesale") ? force_wholesale_order : force_retail_order
       end
       
-      def modify_order_on_logout
-        force_retail
-      end
-      
-      def force_retail
+      def force_retail_order
         order = Order.find_by_id(session[:order_id])
         order.force_retail if !order.nil? && order.state == 'in_progress'
       end
       
-      def force_wholesale
+      def force_wholesale_order
         order = Order.find_by_id(session[:order_id])
         order.force_wholesale if !order.nil? && order.state == 'in_progress'
       end
