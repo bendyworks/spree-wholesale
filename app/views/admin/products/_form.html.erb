@@ -1,7 +1,3 @@
-<% content_for :head do %>
-<%= calendar_date_select_includes %>
-<% end %>
-
 <div class="yui-gc">
   <div class="yui-u first">
     
@@ -35,7 +31,7 @@
     <p>
       <%= f.label :available_on, t("available_on") %><br />
       <%= f.error_message_on :available_on %>
-      <%= calendar_date_select :product, :available_on, :style=>"width:150px" %>
+      <%= unobtrusive_date_text_picker :product, :available_on, :style=>"width:150px" %>
     </p>
 
     <p>
