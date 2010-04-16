@@ -22,8 +22,11 @@
     <p><%= f.label :price, t("price") %>:<br />
     <%= f.text_field :price, :value => number_with_precision(@variant.price, :precision => 2) %></p>
 
+    <p><%= f.label :cost_price, t("cost_price") %>:<br />
+    <%= f.text_field :cost_price, :value => number_with_precision(@variant.cost_price, :precision => 2) %></p>
+
     <p><%= f.label :wholesale_price, t("wholesale_price") %>:<br />
-    <%= f.text_field :wholesale_price :value => number_with_precision(@variant.cost_price, :precision => 2) %></p>
+    <%= f.text_field :wholesale_price, :value => number_with_precision(@variant.wholesale_price, :precision => 2) %></p>
 
     <p><%= f.label :on_hand, t("on_hand") %>:<br />
     <%= f.text_field :on_hand %></p>
